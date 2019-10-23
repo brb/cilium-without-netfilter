@@ -68,5 +68,6 @@ kubeadm joint ${NODE_IP_ADDR}:6443 --token abcdef.0123456789abcdef --discovery-t
 6. Install Cilium:
 
 ```
+sed -i 's/NODE_IP_ADDR/$NODE_IP_ADDR/g' cilium.yaml
 kubectl apply -f cilium.yaml
 ```
