@@ -73,7 +73,11 @@ cat /etc/udev/rules.d/70-persistent-net.rules
 SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ATTR{address}=="02:01:02:03:04:05", ATTR{dev_id}=="0x0", ATTR{type}=="1", NAME="eth1"
 ```
 
-7. Install Cilium:
+7. Create L3/L2 network:
+
+https://support.packet.com/kb/articles/layer-2-configurations (`Configuration #1: Leaving eth0 in bond0 and adding a single VLAN to eth1.`)
+
+8. Install Cilium:
 
 ```
 sed -i "s/NODE_MASTER_IP/${NODE_IP_ADDR}/g" cilium.yaml
