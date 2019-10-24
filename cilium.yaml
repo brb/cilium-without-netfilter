@@ -143,6 +143,8 @@ data:
   install-iptables-rules: "false"
   auto-direct-node-routes: "true"
   enable-node-port: "true"
+  enable-dsr: "false"
+  device: "eth1"
 
 ---
 # Source: cilium/charts/agent/templates/serviceaccount.yaml

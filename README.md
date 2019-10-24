@@ -50,8 +50,9 @@ apt-mark hold kubelet kubeadm kubectl
 4. Deploy Kubernetes master:
 
 ```
+export NODE_IP_ADDR=...
 kubeadm config print init-defaults --component-configs KubeletConfiguration > k8s-config.yaml
-sed -i 's/advertiseAddress: 1.2.3.4/advertiseAddress: $NODE_IP_ADDR/g' k8s-config.yaml
+sed -i "s/advertiseAddress: 1.2.3.4/advertiseAddress: ${NODE_IP_ADDR}/g" k8s-config.yaml
 sed -i 's/makeIPTablesUtilChains: true/makeIPTablesUtilChains: false/g' k8s-config.yaml
 sed -i '/serviceSubnet: 10.96.0.0\/12/a foobar' k8s-config.yaml
 sed -i 's/foobar/  podSubnet: 10.217.0.0\/16/g' k8s-config.yaml
@@ -68,6 +69,6 @@ kubeadm joint ${NODE_IP_ADDR}:6443 --token abcdef.0123456789abcdef --discovery-t
 6. Install Cilium:
 
 ```
-sed -i 's/NODE_IP_ADDR/$NODE_IP_ADDR/g' cilium.yaml
+sed -i "s/NODE_MASTER_IP/${NODE_IP_ADDR}/g" cilium.yaml
 kubectl apply -f cilium.yaml
 ```
