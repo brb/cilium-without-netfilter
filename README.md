@@ -66,7 +66,14 @@ kubectl taint nodes --all node-role.kubernetes.io/master-
 kubeadm joint ${NODE_IP_ADDR}:6443 --token abcdef.0123456789abcdef --discovery-token-unsafe-skip-ca-verification --ignore-preflight-errors=FileContent--proc-sys-net-bridge-bridge-nf-call-iptables,SystemVerification
 ```
 
-6. Install Cilium:
+6. Rename ifaces:
+
+```
+cat /etc/udev/rules.d/70-persistent-net.rules
+SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ATTR{address}=="02:01:02:03:04:05", ATTR{dev_id}=="0x0", ATTR{type}=="1", NAME="eth1"
+```
+
+7. Install Cilium:
 
 ```
 sed -i "s/NODE_MASTER_IP/${NODE_IP_ADDR}/g" cilium.yaml
