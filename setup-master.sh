@@ -9,7 +9,7 @@ swapoff -a
 
 apt install -y tuned psmisc
 tuned-adm profile network-latency
-killall irqbalance
+killall irqbalance || true
 
 kubeadm config print init-defaults --component-configs KubeletConfiguration > k8s-config.yaml
 sed -i "s/advertiseAddress: 1.2.3.4/advertiseAddress: ${NODE_IP_ADDR}/g" k8s-config.yaml
