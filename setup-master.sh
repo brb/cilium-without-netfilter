@@ -19,7 +19,7 @@ sed -i 's/foobar/  podSubnet: 10.217.0.0\/16/g' k8s-config.yaml
 SKIP_PHASES_PARAM=""
 [ "$WITH_NETFILTER" = "1" ] || SKIP_PHASES_PARAM="--skip-phases=addon/kube-proxy"
 
-kubeadm init "$SKIP_PHASES_PARAM" --config k8s-config.yaml --ignore-preflight-errors=FileContent--proc-sys-net-bridge-bridge-nf-call-iptables,SystemVerification
+kubeadm init $SKIP_PHASES_PARAM --config k8s-config.yaml --ignore-preflight-errors=FileContent--proc-sys-net-bridge-bridge-nf-call-iptables,SystemVerification
 
 rm -rf $HOME/.kube
 mkdir -p $HOME/.kube
