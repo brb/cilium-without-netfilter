@@ -7,6 +7,10 @@ WITH_NETFILTER=$2
 
 swapoff -a
 
+apt install -y tuned psmisc
+tuned-adm profile network-latency
+killall irqbalance
+
 kubeadm config print init-defaults --component-configs KubeletConfiguration > k8s-config.yaml
 sed -i "s/advertiseAddress: 1.2.3.4/advertiseAddress: ${NODE_IP_ADDR}/g" k8s-config.yaml
 [ "$WITH_NETFILTER" = "1" ] || sed -i 's/makeIPTablesUtilChains: true/makeIPTablesUtilChains: false/g' k8s-config.yaml

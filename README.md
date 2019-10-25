@@ -6,3 +6,7 @@
 * https://gitlab.com/brb/linux-5.3-with-nf -- v5.3 with netfilter
 * https://gitlab.com/brb/linux-5.3-aws-with-nf
 * https://gitlab.com/brb/linux-5.3-aws-wo-nf
+
+## Scripts
+
+* https://github.com/cilium/misc-scripts
