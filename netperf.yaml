@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: netperf
+  name: netperf
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: netperf
+  template:
+    metadata:
+      labels:
+        run: netperf
+    spec:
+      containers:
+      - image: brb0/netperf
+        name: netperf
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: netperf
+spec:
+  selector:
+    run: netperf
+  ports:
+    - protocol: TCP
+      port: 12865
+      targetPort: 12865
+      nodePort: 30001
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: netperf-data
+spec:
+  selector:
+    run: netperf
+  ports:
+    - protocol: TCP
+      port: 30080
+      targetPort: 30080
+      nodePort: 30080
+  type: NodePort
