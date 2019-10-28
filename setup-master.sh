@@ -4,6 +4,7 @@ set -ex
 
 NODE_IP_ADDR=$1
 WITH_NETFILTER=$2
+WITH_IPVS=$3
 
 swapoff -a
 
@@ -18,6 +19,16 @@ sed -i '/serviceSubnet: 10.96.0.0\/12/a foobar' k8s-config.yaml
 sed -i 's/foobar/  podSubnet: 10.217.0.0\/16/g' k8s-config.yaml
 SKIP_PHASES_PARAM=""
 [ "$WITH_NETFILTER" = "1" ] || SKIP_PHASES_PARAM="--skip-phases=addon/kube-proxy"
+
+if [ "$WITH_IPVS" = "1" ]; then
+    cat >> k8s-config <<EOF
+---
+apiVersion: kubeproxy.config.k8s.io/v1alpha1
+kind: KubeProxyConfiguration
+mode: ipvs
+---
+EOF
+fi
 
 kubeadm init $SKIP_PHASES_PARAM --config k8s-config.yaml --ignore-preflight-errors=FileContent--proc-sys-net-bridge-bridge-nf-call-iptables,SystemVerification
 
