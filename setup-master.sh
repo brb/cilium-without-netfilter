@@ -21,7 +21,7 @@ SKIP_PHASES_PARAM=""
 [ "$WITH_NETFILTER" = "1" ] || SKIP_PHASES_PARAM="--skip-phases=addon/kube-proxy"
 
 if [ "$WITH_IPVS" = "1" ]; then
-    cat >> k8s-config <<EOF
+    cat >> k8s-config.yaml <<EOF
 ---
 apiVersion: kubeproxy.config.k8s.io/v1alpha1
 kind: KubeProxyConfiguration
