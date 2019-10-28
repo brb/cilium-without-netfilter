@@ -10,3 +10,9 @@
 ## Scripts
 
 * https://github.com/cilium/misc-scripts
+
+## Creating services
+
+```
+for i in $(seq 1 N); do sed 's/xxx/1/g' netperf-svc.yaml | kubectl apply -f -; done
+```
