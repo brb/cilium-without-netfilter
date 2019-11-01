@@ -18,25 +18,26 @@ spec:
       containers:
       - image: brb0/netperf
         name: netperf
+  nodeName: REPLACE_ME
 ---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: netperf-1
+#spec:
+#  selector:
+#    run: netperf
+#  ports:
+#    - protocol: TCP
+#      port: 12865
+#      targetPort: 12865
+#      nodePort: 30001
+#  type: NodePort
+#---
 apiVersion: v1
 kind: Service
 metadata:
-  name: netperf
-spec:
-  selector:
-    run: netperf
-  ports:
-    - protocol: TCP
-      port: 12865
-      targetPort: 12865
-      nodePort: 30001
-  type: NodePort
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: netperf-data
+  name: np-data
 spec:
   selector:
     run: netperf
