@@ -5,6 +5,7 @@ set -ex
 NODE_IP_ADDR=$1
 
 swapoff -a
+mount bpffs /sys/fs/bpf -t bpf
 
 apt install -y tuned psmisc
 tuned-adm profile network-latency

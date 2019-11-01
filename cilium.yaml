@@ -144,7 +144,8 @@ data:
   auto-direct-node-routes: "true"
   enable-node-port: "true"
   enable-dsr: "false"
-  device: "eth1"
+  device: "eth0"
+  enable-l7-proxy: "false"
 
 ---
 # Source: cilium/charts/agent/templates/serviceaccount.yaml
@@ -380,7 +381,7 @@ spec:
           value: "NODE_MASTER_IP"
         - name: KUBERNETES_SERVICE_PORT
           value: "6443"
-        image: "brb0/cilium:no-netfilter-no-dsr-v1"
+        image: "brb0/cilium:no-netfilter-v3"
         imagePullPolicy: Always
         lifecycle:
           postStart:
@@ -467,7 +468,7 @@ spec:
               key: wait-bpf-mount
               name: cilium-config
               optional: true
-        image: "brb0/cilium:no-netfilter-no-dsr-v1"
+        image: "brb0/cilium:no-netfilter-v3"
         imagePullPolicy: Always
         name: clean-cilium-state
         securityContext:

@@ -7,6 +7,7 @@ WITH_NETFILTER=$2
 WITH_IPVS=$3
 
 swapoff -a
+mount bpffs /sys/fs/bpf -t bpf
 
 apt install -y tuned psmisc
 tuned-adm profile network-latency
