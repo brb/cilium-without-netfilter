@@ -10,7 +10,7 @@ WORKER_IP="$2"
 RESULTS_FILE="$3"
 
 prev=1
-for i in 1 100 1000 2000 2768; do
+for i in 1 100 1000 2000 2767; do
     for j in $(seq $prev $i); do sed "s/xxx/$j/g" netperf-svc.yaml | kubectl apply -f -; done
     prev=$i
     echo "# SVC=$i" >> $RESULTS_FILE
