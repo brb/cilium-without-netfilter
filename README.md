@@ -9,7 +9,7 @@
 
 ## Scripts
 
-* https://github.com/cilium/misc-scripts
+* https://github.com/brb/misc-scripts
 
 ## Creating services
 
