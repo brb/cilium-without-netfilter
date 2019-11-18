@@ -18,7 +18,7 @@ spec:
       containers:
       - image: brb0/netperf
         name: netperf
-  nodeName: REPLACE_ME
+      nodeName: REPLACE_ME
 ---
 #apiVersion: v1
 #kind: Service

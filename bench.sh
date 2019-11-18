@@ -15,7 +15,7 @@ for i in 1 100 1000 2000 2767; do
     prev=$i
     echo "# SVC=$i" >> $RESULTS_FILE
     for j in $(seq 1 3); do
-        PORT=$(kubectl get svc | grep "netperf-$((1 + RANDOM % i))" |awk '{print $5}' | cut -d: -f2 | cut -d/ -f1)
+        PORT=$(kubectl get svc | grep "netperf-$((1 + RANDOM % i))" | head -n1 | awk '{print $5}' | cut -d: -f2 | cut -d/ -f1)
         echo "## TCP_CRR direct" >> $RESULTS_FILE
         $HOME/misc-scripts/latency_netperf $WORKER_IP $PORT CRR >> $RESULTS_FILE
         echo "## TCP_CRR remote" >> $RESULTS_FILE
